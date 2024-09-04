@@ -1,0 +1,52 @@
+# Credentials 
+
+Username: none 
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+enable
+configure terminal
+interface GigabitEthernet1
+ipv6 address 2001:DB8:3:1::1001/64
+no shutdown
+end
+
+configure terminal
+interface GigabitEthernet2
+ipv6 address 2001:DB8:3:2::1001/64
+no shutdown
+end
+
+configure terminal
+interface GigabitEthernet4
+ipv6 address 2001:DB8:B000:B::1003/64
+no shutdown
+end
+
+configure terminal
+router static address-family ipv6 unicast
+2001:db8:a000::/48 2001:db8:b000:b::1
+ipv6 unicast-routing
+end
+
+## ACL
+enable
+configure terminal
+ipv6 access-list dest48
+ sequence 10 deny ipv6 any 2001:DB8:3::/48
+ sequence 100 permit ipv6 any any
+!
+ipv6 access-list dest64
+ sequence 10 deny ipv6 any 2001:DB8:3:1::/64
+ sequence 100 permit ipv6 any any
+!
+ipv6 access-list src64
+ sequence 10 deny ipv6 2001:DB8:A000:A::/64 any
+ sequence 100 permit ipv6 any any
+!
+
+end
+
+

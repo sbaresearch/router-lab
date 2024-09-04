@@ -1,0 +1,15 @@
+settings:
+  send_hop_limit: 63
+  output_directory: "/tmp/mikrotik/"
+routers:
+  - name: "MikroTikCHR6.48.6-1"
+    type: "MIKROTIK"
+    wan: "ether4"
+    private_range: "5"
+    telnet_port: 5042
+
+  - name: "MikroTikCHR7.2.3"
+    type: "MIKROTIK"
+    wan: "ether4"
+    private_range: "4"
+    telnet_port: 5021

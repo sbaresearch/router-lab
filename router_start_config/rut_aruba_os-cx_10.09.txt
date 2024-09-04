@@ -1,0 +1,36 @@
+# Credentials 
+
+Username: admin 
+Password: admin
+
+# Config Changes based on default config
+
+## Interfaces
+
+configure terminal
+interface 1/1/1
+    no shutdown
+    ipv6 address 2001:db8:9:1::1001/64
+interface 1/1/2
+    no shutdown
+    ipv6 address 2001:db8:9:2::1001/64
+interface 1/1/4
+    no shutdown
+    ipv6 address 2001:db8:b000:b::1009/64
+exit
+ipv6 route 2001:db8:a000::/48 2001:db8:b000:b::1
+end
+
+## ACL
+
+configure terminal
+access-list ipv6 dest48
+    10 deny any any 2001:db8:9::/48
+    100 permit any any any
+access-list ipv6 dest64
+    10 deny any any 2001:db8:9:1::/64
+    100 permit any any any
+access-list ipv6 src64
+    10 deny any 2001:db8:a000:a::/64 any
+    100 permit any any any
+end

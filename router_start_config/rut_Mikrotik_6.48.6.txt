@@ -1,0 +1,20 @@
+# Credentials 
+
+Username: admin
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+/ipv6 route
+add dst-address=2001:db8:a000:a::/64 gateway=2001:db8:b000:b::1
+/ipv6 address
+add address=2001:db8:b000:b::1005 interface=ether4
+add address=2001:db8:5:1::1001 interface=ether1
+add address=2001:db8:5:2::1001 interface=ether2
+
+## ACL
+/ipv6 firewall filter
+add action=reject chain=forward comment=DEST64 disabled=yes dst-address=2001:db8:5:1::/64 in-interface=ether4
+add action=reject chain=forward comment=DEST48 disabled=yes dst-address=2001:db8:5::/48 in-interface=ether4
+add action=reject chain=forward comment=SRC64 disabled=yes in-interface=ether4 src-address=2001:db8:a000:a::/64

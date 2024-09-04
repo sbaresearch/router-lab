@@ -1,0 +1,28 @@
+settings:
+  send_hop_limit: 63
+  output_directory: "/tmp/two/"
+
+routers:
+  - name: "MikroTikCHR7.2.3"
+    type: "MIKROTIK"
+    wan: "ether4"
+    private_range: "4"
+    telnet_port: 5021
+
+  - name: "MikroTikCHR6.48.6-1"
+    type: "MIKROTIK"
+    wan: "ether4"
+    private_range: "5"
+    telnet_port: 5042
+
+  - name: "OpenWrt21.02.1"
+    type: "OPENWRT"
+    wan: "Lan"
+    private_range: "6"
+    telnet_port: 5059
+
+  - name: "OpenWrt19.07.7"
+    type: "OPENWRT"
+    wan: "Lan"
+    private_range: "7"
+    telnet_port: 5050

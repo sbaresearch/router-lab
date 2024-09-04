@@ -1,0 +1,62 @@
+# Credentials 
+
+Username: none
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+
+configure terminal
+interface gi0/0
+ipv6 address 2001:DB8:B000:B::1001/64
+ipv6 enable
+no shutdown
+end
+
+configure terminal
+interface gi0/1
+ipv6 address 2001:DB8:1:1::1001/64
+ipv6 enable
+no shutdown
+end
+
+configure terminal
+interface gi0/2
+ipv6 address 2001:DB8:1:2::1001/64
+ipv6 enable
+no shutdown
+end
+
+configure terminal
+ipv6 route 2001:db8:a000::/48 2001:db8:b000:b::1
+ipv6 unicast-routing
+end
+
+## ACL
+
+configure terminal
+ipv6 access-list dest64
+sequence 10 deny ipv6 any 2001:DB8:1:1::/64
+sequence 100 permit ipv6 any any
+exit
+
+ipv6 access-list dest48
+sequence 10 deny ipv6 any 2001:DB8:1::/48
+sequence 100 permit ipv6 any any
+exit
+
+ipv6 access-list src64
+sequence 10 deny ipv6 2001:DB8:A000:A::/64 any
+sequence 100 permit ipv6 any any
+end
+
+# Sources
+
+src: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_basic/configuration/xe-3s/ip6b-xe-3s-book/ip6-add-basic-conn-xe.html#GUID-A4643120-626D-415C-958F-2DA89105FDA9
+src: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-5/configuration_guide/rtng/b_175_rtng_9300_cg/configuring_ipv6_unicast_routing.html#id_104429
+src: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/rtng/b_173_rtng_9600_cg/configuring_ipv6_unicast_routing.html
+src: https://www.cisco.com/c/en/us/support/docs/ip/ip-version-6-ipv6/113361-ipv6-static-routes.html
+src: https://study-ccna.com/how-to-configure-ipv6/
+src: https://www.learncisco.net/courses/icnd-1/ip-routing-technologies/static-routing.html
+src: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960xr/software/15-2_5_e/configuration_guide/b_1525e_consolidated_2960xr_cg/configuring_ipv6_acls.html

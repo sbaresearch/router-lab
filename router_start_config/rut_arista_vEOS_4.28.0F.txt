@@ -1,0 +1,28 @@
+# Credentials 
+
+Username: admin
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+
+configure terminal
+interface Ethernet1
+   no switchport
+   ipv6 enable
+   ipv6 address 2001:db8:d:1::1001/64
+exit
+interface Ethernet2
+   no switchport
+   ipv6 enable
+   ipv6 address 2001:db8:d:2::1001/64
+exit
+ipv6 unicast-routing
+ipv6 route 2001:db8:a000::/48 2001:db8:b000:b::1
+
+## ACL
+
+Does not support ACLs.
+
+

@@ -1,0 +1,22 @@
+settings:
+  send_hop_limit: 63
+  output_directory: "/tmp/one/"
+
+routers:
+  - name: "CiscoIOSv15.9(3)M3-2"
+    type: "IOS"
+    wan: "GigabitEthernet 0/0"
+    private_range: "1"
+    telnet_port: 5009
+
+  - name: "CiscoIOSXRv90007.2.2-1"
+    type: "XRv"
+    wan: "GigabitEthernet 0/0/0/0"
+    private_range: "2"
+    telnet_port: 5054
+
+  - name: "CiscoCSR1000v17.03.02-1"
+    type: "IOS"
+    wan: "GigabitEthernet 0/0"
+    private_range: "3"
+    telnet_port: 5073

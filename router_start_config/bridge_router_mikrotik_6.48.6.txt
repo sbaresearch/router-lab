@@ -1,0 +1,25 @@
+# Credentials
+
+Username: admin
+Password: none
+
+# Config Changes based on default config
+
+/ipv6 address
+add address=2001:db8:a000:a::1 interface=ether4
+add address=2001:db8:b000:b::1 interface=ether1
+/ipv6 route
+add dst-address=2001:db8:1::/48 gateway=2001:db8:b000:b::1001
+add dst-address=2001:db8:2::/48 gateway=2001:db8:b000:b::1002
+add dst-address=2001:db8:3::/48 gateway=2001:db8:b000:b::1003
+add dst-address=2001:db8:4::/48 gateway=2001:db8:b000:b::1004
+add dst-address=2001:db8:5::/48 gateway=2001:db8:b000:b::1005
+add dst-address=2001:db8:6::/48 gateway=2001:db8:b000:b::1006
+add dst-address=2001:db8:7::/48 gateway=2001:db8:b000:b::1007
+add dst-address=2001:db8:8::/48 gateway=2001:db8:b000:b::1008
+add dst-address=2001:db8:9::/48 gateway=2001:db8:b000:b::1009
+add dst-address=2001:db8:a::/48 gateway=2001:db8:b000:b::100a
+add dst-address=2001:db8:b::/48 gateway=2001:db8:b000:b::100b
+add dst-address=2001:db8:c::/48 gateway=2001:db8:b000:b::100c
+add dst-address=2001:db8:d::/48 gateway=2001:db8:b000:b::100d
+add dst-address=2001:db8:e::/48 gateway=2001:db8:b000:b::100e

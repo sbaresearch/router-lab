@@ -1,0 +1,23 @@
+settings:
+  send_hop_limit: 63
+  output_directory: "/tmp/three/"
+
+routers:
+  - name: "ArubaOS-CXSimulationSoftware10.09.1000"
+    type: "ARUBA"
+    wan: "1/1/4"
+    private_range: "9"
+    telnet_port: 5033
+
+  # JUNOS: taking the vMX CP and not the FP
+  - name: "JunipervMXvCP17.1R1.8-ESXi-1"
+    type: "JUNOS"
+    wan: "ge-0/0/0"
+    private_range: "a"
+    telnet_port: 5055
+
+  - name: "HPEVSR10017.10.E0519L03"
+    type: "HPE"
+    wan: "GigabitEthernet 4/0"
+    private_range: "b"
+    telnet_port: 5056

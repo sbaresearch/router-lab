@@ -1,0 +1,60 @@
+# Credentials 
+
+## vCP 
+
+Username: root 
+Password: none 
+
+## vFP
+
+Username: root
+Password: root
+
+# Config Changes based on default config
+
+## Pre Config
+The juniper vMX consists of two seperate entities, one for the actual forwarding (vFP), the second for controlling (vCP).
+The two routers need to be connected as per manual. All configuration needs to be done on the controlling plane.
+Enter configuration mode by entering 'cli' in the command line to start the juniper cli.
+
+## Interfaces
+
+configure
+set interfaces ge-0/0/0 unit 0 family inet6 address 2001:db8:b000:b::100a/64
+set interfaces ge-0/0/1 unit 0 family inet6 address 2001:db8:a:1::1001/64
+set interfaces ge-0/0/2 unit 0 family inet6 address 2001:db8:a:2::1001/64
+set routing-options rib inet6.0 static route 2001:db8:a000:a::/48 next-hop 2001:db8:b000:b::1
+commit
+exit
+
+## ACL
+
+configure
+edit firewall family inet6 filter dest64
+set term rule1 from destination-address 2001:db8:a:1::/64
+set term rule1 then reject
+set term finally then accept
+commit
+exit
+
+edit firewall family inet6 filter dest48
+set term rule1 from destination-address 2001:db8:a::/48
+set term rule1 then reject
+set term finally then accept
+commit
+exit
+
+edit firewall family inet6 filter src64
+set term rule1 from source-address 2001:db8:a000:a::/64
+set term rule1 then reject
+set term finally then accept
+commit
+exit
+exit
+
+# Sources
+
+src: https://www.juniper.net/documentation/en_US/junos/topics/topic-map/policy-static-routing.html#jd0e539
+src: https://www.juniper.net/documentation/us/en/software/junos/interfaces-ethernet-switches/topics/ref/statement/filter-edit-interfaces.html
+src: https://www.juniper.net/documentation/us/en/software/junos/routing-policy/topics/concept/firewall-filter-stateless-evaluate-packets.html
+src: https://clayhaynes.ie/2018/04/16/running-the-vmx-on-vmware-fusion/

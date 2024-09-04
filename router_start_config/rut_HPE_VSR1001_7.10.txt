@@ -1,0 +1,49 @@
+# Credentials 
+
+Username: none
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+
+sys
+telnet server enable
+line aux 0
+authentication-mode none
+user-role network-admin
+save f
+
+system-view
+interface GigabitEthernet 1/0
+ipv6 address 2001:DB8:B:1::1001/64
+interface GigabitEthernet 2/0
+ipv6 address 2001:DB8:B:2::1001/64
+interface GigabitEthernet 4/0
+ipv6 address 2001:DB8:B000:B::100B/64
+ipv6 route-static 2001:DB8:A000:: 48 2001:DB8:B000:B::1
+exit
+
+ipv6 icmpv6 multicast-echo-reply enable
+ipv6 unreachables enable
+ipv6 hoplimit-expires enable
+ipv6 redirects enable
+
+## ACL
+
+system-view
+acl ipv6 advanced name dest48
+rule 0 deny ipv6 destination 2001:DB8:B::/48
+acl ipv6 advanced name dest64
+rule 0 deny ipv6 destination 2001:DB8:B:1::/64
+acl ipv6 advanced name src64
+rule 0 deny ipv6 source 2001:DB8:A000:A::/64
+exit
+
+# Source
+
+src: https://support.hpe.com/hpesc/public/docDisplay?docId=c03937369&docLocale=en_US
+src: https://support.hpe.com/hpesc/public/docDisplay?docId=c03937308&docLocale=en_US
+src: https://techhub.hpe.com/eginfolib/networking/docs/routers/vsr1000/cg/5200-3156_l3-ip-svcs_cg/content/478552097.htm and following
+
+

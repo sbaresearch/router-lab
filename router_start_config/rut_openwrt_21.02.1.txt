@@ -1,0 +1,105 @@
+# Credentials 
+
+Username: none 
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+
+Modify /etc/config/network
+
+config interface 'lan'
+        option ifname 'eth0'
+        option proto 'static'
+        option ip6addr '2001:DB8:B000:B::1006/64'
+
+config interface 'wan1'
+        option ifname 'eth1'
+        option proto 'static'
+        option ip6addr '2001:db8:6:1::1001/64'
+
+config interface 'wan2'
+        option ifname 'eth2'
+        option proto 'static'
+        option ip6addr '2001:db8:6:2::1001/64'
+
+config route6 'neta'
+        option interface 'lan'
+        option target '2001:db8:a000:a::/48'
+        option gateway '2001:db8:b000:b::1'
+
+## ACL
+
+Modify /etc/config/firewall
+
+config defaults
+        option syn_flood '1'
+        option input 'ACCEPT'
+        option output 'ACCEPT'
+        option forward 'ACCEPT'
+
+config zone
+        option name 'lan'
+        option network 'lan'
+        option family 'ipv6'
+
+config zone
+        option name 'wan1'
+        option network 'wan1'
+        option family 'ipv6'
+
+config zone
+        option name 'wan2'
+        option network 'wan2'
+        option family 'ipv6'
+
+config zone
+        option name 'wan'
+        option network 'wan1 wan2'
+        option family 'ipv6'
+
+config rule
+        option name 'Allow-HTTP-Access'
+        option src 'lan'
+        option proto 'tcp'
+        option dest_port '80'
+        option target 'ACCEPT'
+        option family 'ipv6'
+
+config rule
+        option name 'DEST64'
+        option src 'lan'
+        option dest_ip '2001:db8:6:1::/64'
+        option dest 'wan1'
+        option proto 'all'
+        option target 'REJECT'
+        option family 'ipv6'
+        option enabled '0'
+
+config rule
+        option name 'DEST48'
+        option src 'lan'
+        option dest_ip '2001:db8:6::/48'
+        option dest 'wan'
+        option proto 'all'
+        option target 'REJECT'
+        option family 'ipv6'
+        option enabled '0'
+
+config rule
+        option name 'SRC64'
+        option src 'lan'
+        option src_ip '2001:db8:a000:a::/64'
+        option dest 'wan'
+        option proto 'all'
+        option target 'REJECT'
+        option family 'ipv6'
+        option enabled '0'
+
+
+
+# Sources
+
+src: https://openwrt.org/docs/guide-user/network/routes_configuration
+src: https://openwrt.org/docs/guide-user/network/ucicheatsheet

@@ -1,0 +1,22 @@
+settings:
+  send_hop_limit: 63
+  output_directory: "/tmp/four/"
+
+routers:
+  - name: "HuaWeiNE40Ene40e"
+    type: "HUAWEI"
+    wan: "Ethernet 1/0/0"
+    private_range: "c"
+    telnet_port: 5053
+
+  - name: "AristavEOS4.28.0F(new)-1"
+    type: "ARISTA"
+    wan: "Ethernet 4"
+    private_range: "d"
+    telnet_port: 5051
+
+  - name: "VyOS1.3.0-epa1-1"
+    type: "VYOS"
+    wan: "eth0"
+    private_range: "e"
+    telnet_port: 5052

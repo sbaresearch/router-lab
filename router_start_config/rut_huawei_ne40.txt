@@ -1,0 +1,36 @@
+# Credentials 
+
+Username: none
+Password: none
+
+# Config Changes based on default config
+
+## Interfaces
+
+system-view
+interface Ethernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:B000:B::100C/64
+commit
+quit
+interface Ethernet1/0/1
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:C:1::1001/64
+commit
+quit
+interface Ethernet1/0/2
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:C:2::1001/64
+commit
+quit
+ipv6 route-static 2001:DB8:A000:: 48 2001:DB8:B000:B::1
+commit
+quit
+
+## ACL
+
+Does not support ACL.
+

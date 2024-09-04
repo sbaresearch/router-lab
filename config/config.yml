@@ -1,0 +1,83 @@
+settings:
+  send_hop_limit: 128
+  telnet_host: 172.31.200.1
+  output_directory: "/tmp/gns_lab/"
+routers:
+  - name: "CiscoIOSv15.9(3)M3-2"
+    type: "IOS"
+    wan: "GigabitEthernet 0/0"
+    private_range: "1"
+    telnet_port: 5009
+
+  - name: "CiscoIOSXRv90007.2.2-1"
+    type: "XRv"
+    wan: "GigabitEthernet 0/0/0/0"
+    private_range: "2"
+    telnet_port: 5054
+
+  - name: "CiscoCSR1000v17.03.02-1"
+    type: "IOS"
+    wan: "GigabitEthernet4"
+    private_range: "3"
+    telnet_port: 5073
+
+  - name: "MikroTikCHR6.48.6-1"
+    type: "MIKROTIK"
+    wan: "ether4"
+    private_range: "5"
+    telnet_port: 5042
+
+  - name: "MikroTikCHR7.2.3"
+    type: "MIKROTIK"
+    wan: "ether4"
+    private_range: "4"
+    telnet_port: 5021
+
+  - name: "OpenWrt21.02.1"
+    type: "OPENWRT"
+    wan: "Lan"
+    private_range: "6"
+    telnet_port: 5059
+
+  - name: "OpenWrt19.07.7"
+    type: "OPENWRT"
+    wan: "Lan"
+    private_range: "7"
+    telnet_port: 5050
+
+  - name: "ArubaOS-CXSimulationSoftware10.09.1000"
+    type: "ARUBA"
+    wan: "1/1/4"
+    private_range: "9"
+    telnet_port: 5033
+
+  # JUNOS: taking the vMX CP and not the FP
+  - name: "JunipervMXvCP17.1R1.8-ESXi-1"
+    type: "JUNOS"
+    wan: "ge-0/0/0"
+    private_range: "a"
+    telnet_port: 5055
+
+  - name: "HPEVSR10017.10.E0519L03"
+    type: "HPE"
+    wan: "GigabitEthernet 4/0"
+    private_range: "b"
+    telnet_port: 5056
+
+  - name: "HuaWeiNE40Ene40e"
+    type: "HUAWEI"
+    wan: "Ethernet 1/0/0"
+    private_range: "c"
+    telnet_port: 5053
+
+  - name: "AristavEOS4.28.0F(new)-1"
+    type: "ARISTA"
+    wan: "Ethernet 4"
+    private_range: "d"
+    telnet_port: 5051
+
+  - name: "VyOS1.3.0-epa1-1"
+    type: "VYOS"
+    wan: "eth0"
+    private_range: "e"
+    telnet_port: 5052

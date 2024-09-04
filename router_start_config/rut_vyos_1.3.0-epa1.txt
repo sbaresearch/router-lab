@@ -1,0 +1,29 @@
+# Credentials 
+
+Username: vyos
+Password: vyos 
+
+# Config Changes based on default config
+
+## Interfaces
+
+configure
+set interfaces ethernet eth0 address '2001:db8:b000:b::100e/64'
+set interfaces ethernet eth1 address '2001:db8:e:1::1001/64'
+set interfaces ethernet eth2 address '2001:db8:e:2::1001/64'
+set protocols static route6 2001:DB8:A000::/48 next-hop 2001:DB8:B000:B::1
+commit
+
+## ACL
+
+configure
+set firewall ipv6-name dest48 default-action 'drop'
+set firewall ipv6-name dest48 rule 10 action 'reject'
+set firewall ipv6-name dest48 rule 10 destination address '2001:db8:e::/48'
+set firewall ipv6-name dest64 default-action 'drop'
+set firewall ipv6-name dest64 rule 10 action 'reject'
+set firewall ipv6-name dest64 rule 10 destination address '2001:db8:e:1::/64'
+set firewall ipv6-name src64 default-action 'drop'
+set firewall ipv6-name src64 rule 10 action 'reject'
+set firewall ipv6-name src64 rule 10 source address '2001:db8:a000:a::/64'
+commit
